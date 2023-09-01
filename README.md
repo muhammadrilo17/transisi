@@ -22,3 +22,5 @@ Merupakan aplikasi test tahap satu di PT. Transisi Teknologi Mandiri. Fitur yang
 ## Instalasi APK
 
 Untuk menjalankan apk ini, silahkan untuk download apk terlebih dahulu pada root folder dengan nama ```app-release.apk```
+
+Anda dapat mengunduh versi terbaru dari aplikasi kami di tautan berikut: [Download APK](https://github.com/muhammadrilo17/transisi/raw/main/app-release.apk)
