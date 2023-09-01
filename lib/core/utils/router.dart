@@ -18,9 +18,9 @@ class Router {
         return _buildBackRoute(settings, LoginPage());
 
       case Pages.home:
-        return _buildRoute(settings, const HomePage());
+        return _buildRoute(settings, HomePage());
       case Pages.addEmployee:
-        return _buildRoute(settings, const AddEmployeePage());
+        return _buildRoute(settings, AddEmployeePage());
       case Pages.detailEmployee:
         final int id = settings?.arguments as int;
         return _buildRoute(settings, DetailEmployeePage(id: id));

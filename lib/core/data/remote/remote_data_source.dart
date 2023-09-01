@@ -32,7 +32,12 @@ class RemoteDataSource {
       }
       return ApiResource.error(response.data['error']);
     } on DioException catch (e) {
-      return ApiResource.error(e.response?.data['error']);
+      if (e.response?.data != null) {
+        return ApiResource.error(e.response?.data['error']);
+      }
+      return ApiResource.error(e.error.toString());
+    } catch (e) {
+      return ApiResource.error('An unknown error occurred.');
     }
   }
 
@@ -61,7 +66,14 @@ class RemoteDataSource {
       }
       return ApiResource.error(response.data['error']);
     } on DioException catch (e) {
-      return ApiResource.error(e.response?.data['error']);
+      if (e.response?.data != null) {
+        return ApiResource.error(e.response?.data['error']);
+      } else if (e.message != null) {
+        return ApiResource.error(e.message.toString());
+      }
+      return ApiResource.error(e.error.toString());
+    } catch (e) {
+      return ApiResource.error('An unknown error occurred.');
     }
   }
 
@@ -71,8 +83,6 @@ class RemoteDataSource {
         Endpoints.users,
         id,
       );
-
-      print('RILOOOOO ${response.data}');
 
       if (response.statusCode == 200) {
         final EmployeeResponse result = EmployeeMapper.jsonToEntity(
@@ -84,7 +94,12 @@ class RemoteDataSource {
       }
       return ApiResource.error(response.data['error']);
     } on DioException catch (e) {
-      return ApiResource.error(e.response?.data['error']);
+      if (e.response?.data != null) {
+        return ApiResource.error(e.response?.data['error']);
+      }
+      return ApiResource.error(e.error.toString());
+    } catch (e) {
+      return ApiResource.error('An unknown error occurred.');
     }
   }
 
@@ -97,9 +112,9 @@ class RemoteDataSource {
         payload.toMap(),
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         final NewEmployeeResponse result = NewEmployeeMapper.jsonToEntity(
-          response.data['data'],
+          response.data,
         );
 
         final apiResource = ApiResource.success(result);
@@ -107,7 +122,12 @@ class RemoteDataSource {
       }
       return ApiResource.error(response.data['error']);
     } on DioException catch (e) {
-      return ApiResource.error(e.response?.data['error']);
+      if (e.response?.data != null) {
+        return ApiResource.error(e.response?.data['error']);
+      }
+      return ApiResource.error(e.error.toString());
+    } catch (e) {
+      return ApiResource.error('An unknown error occurred.');
     }
   }
 }

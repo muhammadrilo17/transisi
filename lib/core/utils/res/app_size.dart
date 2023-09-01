@@ -22,4 +22,6 @@ class AppSize {
   static const double size_70 = 70;
 
   static const double size_200 = 200;
+
+  static const double size_250 = 250;
 }

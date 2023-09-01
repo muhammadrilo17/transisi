@@ -7,10 +7,13 @@ import 'package:transisi_apps/core/utils/res/app_padding.dart';
 import 'package:transisi_apps/core/utils/res/app_size.dart';
 import 'package:transisi_apps/core/utils/res/app_string.dart';
 import 'package:transisi_apps/core/utils/res/text_style.dart';
+import 'package:transisi_apps/core/utils/utils.dart';
 import 'package:transisi_apps/ui/bloc/home/home_cubit.dart';
+import 'package:transisi_apps/ui/widgets/input_text_border_custom.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  final TextEditingController searchInput = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,28 +29,79 @@ class HomePage extends StatelessWidget {
                   AppString.appTitle,
                   style: textStyleW600S16.copyWith(),
                 ),
+                actions: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: AppMargin.margin_16,
+                        vertical: AppMargin.margin_8),
+                    child: InkWell(
+                      onTap: () {
+                        context.read<HomeCubit>().openSearch();
+                      },
+                      child: Icon(
+                        state.status == HomeStatus.onSearch
+                            ? Icons.cancel
+                            : Icons.search,
+                      ),
+                    ),
+                  ),
+                ],
               ),
+              if (state.status == HomeStatus.onSearch) ...[
+                Container(
+                  margin: const EdgeInsets.all(AppSize.size_16),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: InputTextBorderCustom(
+                          textEditingController: searchInput,
+                          textHint: AppString.searchByName,
+                        ),
+                      ),
+                      const SizedBox(width: AppSize.size_8),
+                      InkWell(
+                        child: const Icon(Icons.send_sharp),
+                        onTap: () {
+                          context.read<HomeCubit>().search(searchInput.text);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
               Expanded(
                 child: state.status == HomeStatus.success
                     ? ListView.builder(
-                        itemCount: state.employees?.length,
+                        itemCount: state.employeesSearched?.length,
                         padding: const EdgeInsets.symmetric(
                           vertical: AppPadding.padding_8,
                         ),
                         itemBuilder: (context, index) {
-                          return itemEmployee(context, state.employees![index]);
+                          return itemEmployee(
+                            context,
+                            state.employeesSearched![index],
+                          );
                         },
                       )
-                    : Center(
-                        child: state.status == HomeStatus.failure
-                            ? Text(
-                                state.exception.toString(),
-                                style: textStyleW500S14,
-                              )
-                            : const CircularProgressIndicator(
-                                color: AppColors.brown,
-                              ),
-                      ),
+                    : state.status == HomeStatus.onSearch
+                        ? Container()
+                        : Center(
+                            child: state.status == HomeStatus.failure
+                                ? Container(
+                                    margin: const EdgeInsets.all(
+                                      AppSize.size_16,
+                                    ),
+                                    child: Text(
+                                      Utils.getExceptionMessage(
+                                        state.exception ?? Exception(),
+                                      ),
+                                      style: textStyleW500S14,
+                                    ),
+                                  )
+                                : const CircularProgressIndicator(
+                                    color: AppColors.brown,
+                                  ),
+                          ),
               )
             ],
           );

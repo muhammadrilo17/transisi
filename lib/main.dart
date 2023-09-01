@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:transisi_apps/di/app_component.dart';
+import 'package:transisi_apps/ui/bloc/add/add_employee_cubit.dart';
 import 'package:transisi_apps/ui/bloc/detail/detail_employee_cubit.dart';
 import 'package:transisi_apps/ui/bloc/home/home_cubit.dart';
 import 'package:transisi_apps/ui/bloc/login/login_cubit.dart';
@@ -36,6 +37,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           lazy: true,
           create: (context) => GetIt.instance<DetailEmployeeCubit>(),
+        ),
+        BlocProvider(
+          lazy: true,
+          create: (context) => GetIt.instance<AddEmployeeCubit>(),
         ),
       ],
       child: MaterialApp(

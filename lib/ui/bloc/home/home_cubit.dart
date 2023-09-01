@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transisi_apps/core/domain/model/employee_model.dart';
@@ -28,12 +29,61 @@ class HomeCubit extends Cubit<HomeState> {
         emit(state.copyWith(
           status: HomeStatus.success,
           employees: value,
+          employeesSearched: value,
         ));
       }
     } else {
       emit(state.copyWith(
         status: HomeStatus.failure,
         exception: Exception(result.message),
+      ));
+    }
+  }
+
+  void openSearch() {
+    if (state.status == HomeStatus.onSearch) {
+      search('');
+    } else {
+      emit(state.copyWith(status: HomeStatus.onSearch));
+    }
+  }
+
+  void search(String keyword) {
+    emit(state.copyWith(status: HomeStatus.loading));
+    print('object ${state.employees?.length}');
+    if (keyword.isEmpty) {
+      emit(
+        state.copyWith(
+          status: HomeStatus.success,
+          employeesSearched: state.employees,
+        ),
+      );
+    } else if (state.employees?.isNotEmpty ?? false) {
+      List<EmployeeModel> filteredEmployees = state.employees!
+          .where(
+            (employee) => employee.firstName
+                .toLowerCase()
+                .contains(keyword.toLowerCase()),
+          )
+          .toList();
+
+      if (filteredEmployees.isEmpty) {
+        emit(state.copyWith(
+          status: HomeStatus.failure,
+          exception: Exception(AppString.thereIsNoData),
+        ));
+      } else {
+        emit(
+          state.copyWith(
+            status: HomeStatus.success,
+            employeesSearched: filteredEmployees,
+          ),
+        );
+      }
+    } else {
+      emit(state.copyWith(
+        status: HomeStatus.failure,
+        exception: Exception(AppString.thereIsNoData),
       ));
     }
   }

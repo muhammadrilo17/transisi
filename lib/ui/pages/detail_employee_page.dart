@@ -20,7 +20,7 @@ class DetailEmployeePage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.beige,
-        toolbarHeight: AppSize.size_200,
+        toolbarHeight: AppSize.size_250,
         flexibleSpace: BlocBuilder<DetailEmployeeCubit, DetailEmployeeState>(
           builder: (context, state) {
             return Column(
@@ -29,27 +29,38 @@ class DetailEmployeePage extends StatelessWidget {
                 const SizedBox(height: AppSize.size_20),
                 BackButton(
                   color: AppColors.white,
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    context.read<DetailEmployeeCubit>().back(context);
+                  },
                 ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Image.network(
-                    state.employees?.avatar ?? '',
-                    errorBuilder: (context, exception, stackTrace) {
-                      return Image.asset(
-                        Utils.imagePath(AppImages.notFound),
-                      );
-                    },
+                if (state.status == DetailEmployeeStatus.success ||
+                    state.status == DetailEmployeeStatus.failure) ...[
+                  Align(
+                    alignment: Alignment.center,
+                    child: Image.network(
+                      state.employees?.avatar ?? '',
+                      errorBuilder: (context, exception, stackTrace) {
+                        return Image.asset(
+                          Utils.imagePath(AppImages.notFound),
+                        );
+                      },
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    '${state.employees?.firstName ?? '-'} ${state.employees?.lastName ?? ''}',
-                    textAlign: TextAlign.center,
-                    style: textStyleW600S16.copyWith(color: AppColors.white),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      '${state.employees?.firstName ?? '-'} ${state.employees?.lastName ?? ''}',
+                      textAlign: TextAlign.center,
+                      style: textStyleW600S16.copyWith(color: AppColors.white),
+                    ),
                   ),
-                ),
+                ] else ...[
+                  const Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.brown,
+                    ),
+                  ),
+                ]
               ],
             );
           },
