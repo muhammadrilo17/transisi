@@ -25,7 +25,7 @@ Untuk menjalankan apk ini, silahkan untuk download apk terlebih dahulu pada root
 
 Anda dapat mengunduh versi terbaru dari aplikasi kami di tautan berikut: [Download APK](https://github.com/muhammadrilo17/transisi/raw/main/app-release.apk)
 
-## Penggunaan API dari reqres.in
+## Penggunaan API dari [reqres.in](https://reqres.in/)
 
 Aplikasi ini mengintegrasikan data dari API reqres.in untuk beberapa fitur, seperti daftar karyawan dan penambahan karyawan baru. API ini digunakan untuk tujuan demonstrasi dan pengembangan saja.
 
