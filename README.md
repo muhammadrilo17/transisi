@@ -33,7 +33,7 @@ Aplikasi ini mengintegrasikan data dari API reqres.in untuk beberapa fitur, sepe
 
 Berikut adalah beberapa endpoint yang digunakan dalam aplikasi ini:
 
-- Daftar Pengguna: [POST /api/login](https://reqres.in/api/login)
+- Login Pengguna: [POST /api/login](https://reqres.in/api/login)
 - Daftar Pengguna: [GET /api/users?page=1](https://reqres.in/api/users)
 - Detail Pengguna: [GET /api/users/{id}](https://reqres.in/api/users/{id})
 - Tambah Pengguna Baru: [POST /api/users](https://reqres.in/api/users)
