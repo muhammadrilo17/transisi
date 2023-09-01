@@ -1,16 +1,24 @@
-# transisi_apps
 
-A new Flutter project.
+# Transisi Apps
 
-## Getting Started
+Proyek ini dikembangkan menggunakan Flutter versi 3.10.0-10.0.pre.18.
 
-This project is a starting point for a Flutter application.
+## Informasi Flutter
+- Versi Flutter: 3.10.0-10.0.pre.18
+- Channel: Master
+- Repositori Flutter di GitHub: [https://github.com/flutter/flutter.git](https://github.com/flutter/flutter.git)
+- Revisi Framework: 9f2e708831 (4 bulan yang lalu) - per tanggal 20 April 2023
+- Revisi Engine: 2db85cbe6a
+- Versi Dart: 3.1.0 (build 3.1.0-22.0.dev)
+- Versi DevTools: 2.23.1
 
-A few resources to get you started if this is your first Flutter project:
+## Deskripsi
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Merupakan aplikasi test tahap satu di PT. Transisi Teknologi Mandiri. Fitur yang di kembangkan meliput:
+- Fitur Login
+- Menampilkan daftar karyawan
+- Menambah karyawan
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Instalasi APK
+
+Untuk menjalankan apk ini, silahkan untuk download apk terlebih dahulu pada root folder dengan nama ```app-release.apk```
