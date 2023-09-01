@@ -24,3 +24,17 @@ Merupakan aplikasi test tahap satu di PT. Transisi Teknologi Mandiri. Fitur yang
 Untuk menjalankan apk ini, silahkan untuk download apk terlebih dahulu pada root folder dengan nama ```app-release.apk```
 
 Anda dapat mengunduh versi terbaru dari aplikasi kami di tautan berikut: [Download APK](https://github.com/muhammadrilo17/transisi/raw/main/app-release.apk)
+
+## Penggunaan API dari reqres.in
+
+Aplikasi ini mengintegrasikan data dari API reqres.in untuk beberapa fitur, seperti daftar karyawan dan penambahan karyawan baru. API ini digunakan untuk tujuan demonstrasi dan pengembangan saja.
+
+### Endpoints API
+
+Berikut adalah beberapa endpoint yang digunakan dalam aplikasi ini:
+
+- Daftar Pengguna: [POST /api/login](https://reqres.in/api/login)
+- Daftar Pengguna: [GET /api/users?page=1](https://reqres.in/api/users)
+- Detail Pengguna: [GET /api/users/{id}](https://reqres.in/api/users/{id})
+- Tambah Pengguna Baru: [POST /api/users](https://reqres.in/api/users)
+
